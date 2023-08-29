@@ -62,10 +62,10 @@ function singleGame(){
        }
        if(result === "computer"){
         increaseCounter(document.querySelector(".countComputer"));
-        document.querySelector(".message").textContent = `You lose! ${computerChoice} beats ${playerChoice}.`;
+        document.querySelector(".message").textContent = `You lose! ${computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1)} beats ${playerChoice}.`;
        } else if (result === "player"){
         increaseCounter(document.querySelector(".countPlayer"));
-        document.querySelector(".message").textContent = `You win! ${playerChoice} beats ${computerChoice}.`;
+        document.querySelector(".message").textContent = `You win! ${playerChoice.charAt(0).toUpperCase()+playerChoice.slice(1)} beats ${computerChoice}.`;
        } else {
         document.querySelector(".message").textContent = "Its a tie! Try again.";
        }

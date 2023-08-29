@@ -9,16 +9,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Play Rock, Paper, Scissors Against the Computer!</h1>
+    <div class="counters">
+        <div class="counterLayout">
+            <p>Player Score</p>
+        <div class="count countPlayer">0</div>
+        </div> 
+        <div class="counterLayout">
+            <p>Computer Score</p>
+        <div class="count countComputer">0</div>
+        </div> 
+    </div>
+    <div class="message">Choose one option from below.<br>First to five wins!</div>
     <div class="buttons">
         <button data-choice="rock" class="btn rock">Rock</button>
         <button data-choice="paper" class="btn paper">Paper</button>
         <button data-choice="scissors" class="btn scissors">Scissors</button>
     </div>
-    <div class="counters">
-        <div class="count countPlayer">0</div>
-        <div class="count countComputer">0</div>
-    </div>
-    <div class="message"></div>
 </body>
 <script src="javascript.js"></script>
 </html>

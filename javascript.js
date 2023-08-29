@@ -27,36 +27,69 @@ function getComputerChoice() {
 // Switch statements based off of player choice
 // conditionals inside switch cases will return the winner
 
-function singleGame(playerChoice, computerChoice){
-    playerChoice = playerChoice.toLowerCase();
+function singleGame(){
+    const computerChoice = getComputerChoice();
+    const playerChoice = this.getAttribute("data-choice");
+    let result;
        switch(playerChoice){
         case "rock":
             if(computerChoice === "paper"){
-                return "You lose! Paper beats Rock";
+                result = "computer";
             } else if (computerChoice == "scissors"){
-                return "You win! Rock beats Scissors";
+                result = "player";
             } else {
-                return "Its a tie!";
+                result = "Its a tie!";
             }
+            break;
         case "paper":
             if(computerChoice === "scissors"){
-                return "You lose! Scissors beats Paper";
+                result = "computer";
             } else if (computerChoice == "rock"){
-                return "You win! Paper beats Rock";
+                result = "player";
             } else {
-                return "Its a tie!";
+                result = "Its a tie!";
             }
+            break;
         case "scissors":
             if(computerChoice === "rock"){
-                return "You lose! Rock beats Scissors";
+                result = "computer";
             } else if (computerChoice == "paper"){
-                return "You win! Scissors beats Paper";
+                result = "player";
             } else {
-                return "Its a tie!";
+                result = "Its a tie!";
             }
-        default:
-            return "Choice invalid, try again!"
+            break;
        }
+       if(result === "computer"){
+        increaseCounter(document.querySelector(".countComputer"));
+        document.querySelector(".message").textContent = `You lose! ${computerChoice} beats ${playerChoice}.`;
+       } else if (result === "player"){
+        increaseCounter(document.querySelector(".countPlayer"));
+        document.querySelector(".message").textContent = `You win! ${playerChoice} beats ${computerChoice}.`;
+       } else {
+        document.querySelector(".message").textContent = "Its a tie! Try again.";
+       }
+       checkEndgame();
+}
+
+function increaseCounter(counter){
+    let currentCount = counter.textContent;
+    counter.textContent = parseInt(currentCount) + 1;
+}
+
+function checkEndgame(){
+    let playerScore = document.querySelector(".countPlayer");
+    let computerScore = document.querySelector(".countComputer");
+    if(parseInt(computerScore.textContent) === 5){
+        document.querySelector(".message").textContent = `The game is over! You lose ${computerScore.textContent} to ${playerScore.textContent}.`;
+        playerScore.textContent = 0;
+        computerScore.textContent = 0;
+    } else if (parseInt(playerScore.textContent) === 5){
+        document.querySelector(".message").textContent = `The game is over! You win ${playerScore.textContent} to ${computerScore.textContent}.`;
+        playerScore.textContent = 0;
+        computerScore.textContent = 0;
+    }
+   
 }
 
 
@@ -70,7 +103,7 @@ function game(){
     let computerScore = 0;
     for (let game = 0; game < 5; game++){
         let playerChoice = prompt("Rock, Papper, Scissors! Choose one to play:");
-        let gameResult = singleGame(playerChoice, getComputerChoice());
+        let gameResult = singleGame(playerChoice);
         if (gameResult.includes("win")){
             playerScore++;
         } else if (gameResult.includes("lose")){
@@ -89,11 +122,14 @@ function game(){
 }
 
 
+// Event listeners and such.
 
+//const rockBtn = document.querySelector(".rock");
+//console.log(rockBtn);
+//rockBtn.addEventListener("click", () => {console.log("ROCK!")});
 
-
-
-
+const buttons = document.querySelectorAll(".btn");
+buttons.forEach(button => button.addEventListener("click", singleGame));
 
 
 
